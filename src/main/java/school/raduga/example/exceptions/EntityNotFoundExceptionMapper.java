@@ -1,7 +1,5 @@
-package school.raduga.example;
+package school.raduga.example.exceptions;
 
-
-import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -13,11 +11,11 @@ import javax.ws.rs.ext.Provider;
  */
 
 @Provider
-public class AppExceptionMapper implements ExceptionMapper<AppException> {
+public class EntityNotFoundExceptionMapper implements ExceptionMapper<EntityNotFoundException> {
     @Override
-    public Response toResponse(AppException e) {
+    public Response toResponse(EntityNotFoundException e) {
         return Response.status(Response.Status.NOT_FOUND)
-                .entity(e.getErrorObject())
+                .entity(ExceptionInfo.create(e))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import school.raduga.example.AppException;
+import school.raduga.example.exceptions.EntityNotFoundException;
 import school.raduga.example.models.User;
 
 import javax.ws.rs.*;
@@ -37,7 +37,7 @@ public class UserController {
                     id);
             asyncResponse.resume(user);
         } catch (EmptyResultDataAccessException e) {
-            asyncResponse.resume(new AppException(id, "User is not found"));
+            asyncResponse.resume(new EntityNotFoundException(id, "user is not found"));
         }
     }
 
